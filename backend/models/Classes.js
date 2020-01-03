@@ -3,9 +3,7 @@ const { model, Schema } = require('mongoose');
 const classesSchema = new Schema({
   classname: String,
   classmodule: String,
-  classdays: [
-    { day: String } 
-  ],
+  classdays: String,
   classType: String,
   createdAt: String,
 

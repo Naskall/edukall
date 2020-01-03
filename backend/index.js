@@ -1,39 +1,12 @@
 const { ApolloServer } = require('apollo-server');
-const gql = require("graphql-tag");
+
 const mongoose = require('mongoose');
 
 const Classes = require('./models/Classes');
 const { MONGODB } = require('./config');
+const typeDefs = require('./graphql/typeDefs')
+const resolvers = require('./graphql/resolvers');
 
-const typeDefs = gql`
-type Class{
-  id:ID!,
-  classname:String!,
-  classmodule:String!,
-  classdays:String!,
-  classtype:String!,
-  createdAt:String!,
-  
-}
-type Query {
-  getClasses: [Class]
-  }
-`;
-
-const resolvers = {
-  Query: {
-    async getClasses() {
-      try {
-        const classes = await Classes.find();
-        return classes;
-        
-
-      } catch (err) {
-        throw new Error(err);
-      }
-    }
-  }
-}
 
 const server = new ApolloServer({
   typeDefs,
